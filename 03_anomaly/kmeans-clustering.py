@@ -2,15 +2,13 @@ import numpy as np
 import math
 np.set_printoptions(precision=2)
 
-
 # CHANGEME:
 fv = np.loadtxt(open("data/probability_table.csv", "rb"), delimiter=",", dtype='float')
-k=2
 iterations=1
-c1=1
-c2=2
 
-
+c1=int(input("C1: "))
+c2=int(input("C2: "))
+k=2 # pls no change
 cluster_1=[c1]
 cluster_2=[c2]
 cntroid_1 = fv[c1-1]
@@ -30,17 +28,17 @@ for _ in range(iterations):
   for i,arr in enumerate(fv):
     i=i+1
     if i not in [c1, c2]:
-      print(f"d(V_{i},V_{c1})=√(", end="")
+      print(f"d(V_{i},C_{c1})=√(", end="")
       for x,y in zip(arr, cntroid_1):
         print(f"({x}-{y})^2+", end="")
       d1_=d(arr, cntroid_1)
-      print(f")={d1_:.2f}")
+      print(f")={d1_:.3f}")
 
-      print(f"d(V_{i},V_{c2})=√(", end="")
+      print(f"d(V_{i},C_{c2})=√(", end="")
       for x,y in zip(arr, cntroid_2):
         print(f"({x}-{y})^2+", end="")
       d2_=d(arr, cntroid_2)
-      print(f")={d2_:.2f}")
+      print(f")={d2_:.3f}")
 
       if d1_ < d2_:
         cluster_1.append(i)
@@ -65,16 +63,34 @@ for _ in range(iterations):
   cntroid_1=np.average(c1_p, axis=0)
   cntroid_2=np.average(c2_p, axis=0)
   print("New centroids: (average of the clusters)")
-  print(f"C1'={cntroid_1}")
-  print(f"C2'={cntroid_2}\n")
+  
+  print("C1'=",end="")
+  for column in c1_p.T:
+    print(f"({' '.join([str(x) for x in column])})/{len(column)}, ", end="")
+  print(f"={cntroid_1}")
+  
+  print("C2'=",end="")
+  for column in c2_p.T:
+    print(f"({' '.join([str(x) for x in column])})/{len(column)}, ", end="")
+  print(f"={cntroid_2}")
+  
   sse = 0
-  print(f"SSE=",end="")
+  print(f"\nSSE=",end="")
   for ci,vi,ii,c in [(cntroid_1,c1_p,cluster_1,1), (cntroid_2, c2_p,cluster_2,2)]:
     for i in ii:
       print(f"d(V_{i},C_{c}')^2 + ", end="")
     sse += sum([d(v, ci)**2 for v in vi ])
   print(" = ",end="")
+
   for ci,vi,ii,c in [(cntroid_1,c1_p,cluster_1,1), (cntroid_2, c2_p,cluster_2,2)]:
     for v in vi:
       print(f"{d(v, ci):.3f}^2 + ", end="")
   print(f"= {sse:.3f}")
+
+  for ci,vi,ii,c in [(cntroid_1,c1_p,cluster_1,1), (cntroid_2, c2_p,cluster_2,2)]:
+    for v,i in zip(vi,ii):
+      print(f"d(V_{i},C_{c})=√(", end="")
+      for x,y in zip(v, ci):
+        print(f"({x:.2f}-{y:.2f})^2+", end="")
+      d2_=d(v, ci)
+      print(f")={d2_:.3f}")
