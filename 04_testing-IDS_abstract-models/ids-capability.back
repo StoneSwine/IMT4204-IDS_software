@@ -42,6 +42,9 @@ print("- " * 10)
 
 print("The joint probabilities:")
 print("P(X|Y)=𝑃(𝑥,𝑦)/𝑃(𝑦)")
+for k, i in zip(py, probtab):
+  for j in i:
+    print(f"({j}/{k:.3f})={(j/k):.2f}")
 print("- " * 10)
 
 print("The conditional entropy 𝐻(𝑋|𝑌)")
@@ -51,7 +54,7 @@ print("-(", end="")
 for k, i in zip(py, probtab):
   for j in i:
     hxy += (j * math.log2(j / k))
-    print(f"{j}*log2({j}/{k:.3f})", end=" + ")
+    print(f"{j}*log2({(j/k):.2f})", end=" + ")
 hxy = -hxy
 print(f") = {hxy:.3f} ")
 print("- " * 10)
