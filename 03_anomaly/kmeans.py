@@ -4,7 +4,7 @@ from operator import itemgetter
 np.set_printoptions(precision=3)
 
 # CHANGEME:
-fv = np.loadtxt(open("data/probability_table.csv", "rb"), delimiter=",", dtype='float')
+fv = np.loadtxt(open("data/kmeans-pt.csv", "rb"), delimiter=",", dtype='float')
 iterations=1
 k=int(input("K: "))
 clusters=[None]*k
