@@ -78,14 +78,16 @@ for x in range(len(setval)):
         c_v+=(setval[x]*setval[y]*probtab[x][y])
 c_v-=(m_x*m_y)
 
-print("𝜎_𝑋𝑌 = ", end="")
+print("𝜎_𝑋𝑌 = ")
 for x in range(len(setval)):
     for y in range(len(setval)):
         print(f"{setval[x]}*{setval[y]}*{probtab[x][y]} + ", end="")
-print(f"- {m_x}*{m_y} = \n\t",end="")
+    print()
+print(f"- {m_x}*{m_y} = \n",end="")
 for x in range(len(setval)):
     for y in range(len(setval)):
         print(f"{(setval[x]*setval[y]*probtab[x][y]):.3f} + ", end="")
+    print()
 print(f"- {(m_x*m_y):.3f} = {c_v:.3f}")
 
 
