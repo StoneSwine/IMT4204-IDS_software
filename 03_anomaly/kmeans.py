@@ -6,6 +6,9 @@ np.set_printoptions(precision=3)
 # CHANGEME:
 fv = np.loadtxt(open("data/kmeans-pt.csv", "rb"), delimiter=",", dtype='float')
 iterations=1
+if input("Euclidian distance OK? ").lower() in ["n","no","noo"]:
+  print("Exiting...")
+  exit()
 k=int(input("K: "))
 clusters=[None]*k
 centroids=[None]*k
@@ -66,8 +69,8 @@ for _ in range(iterations):
       for j in ii:
         print(f"d(V_{j},C_{c+1}')^2 + ", end="")
       sse += sum([d(v, ci)**2 for v in vi ])
-      print(" = ",end="")
-  
+
+  print(" = ",end="")
   print()
 
   for i in range(k):
@@ -85,7 +88,3 @@ for _ in range(iterations):
         d2_=d(v, ci)
         print(f")={d2_:.3f}")
 
-  exit() 
-  
-
-  
