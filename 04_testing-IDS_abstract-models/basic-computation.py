@@ -1,9 +1,9 @@
 
 #CHANGEME
 tp=200
-tn=700
-fp=90
-fn=10
+tn=200
+fp=60
+fn=40
 n=tp+tn+fp+fn
 tpr=tp/(tp+fn)
 tnr=tn/(tn+fp)

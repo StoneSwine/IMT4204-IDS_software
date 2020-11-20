@@ -6,10 +6,10 @@ from itertools import product
 import numpy as np
 
 # CHANGEME:
-TP=200
-TN=700
-FP=90
-FN=10
+TP=50
+TN=800
+FP=100
+FN=50
 
 tot = TP+TN+FP+FN
 
