@@ -1,10 +1,11 @@
 import numpy as np
 import math
+import os
 from operator import itemgetter
 np.set_printoptions(precision=3)
 
 # CHANGEME:
-fv = np.loadtxt(open("data/kmeans-pt.csv", "rb"), delimiter=",", dtype='float')
+fv = np.loadtxt(open(os.path.join(os.path.dirname(__file__), "data/kmeans-pt.csv"), "rb"), delimiter=",", dtype='float')
 iterations=1
 if input("Euclidian distance OK? ").lower() in ["n","no","noo"]:
   print("Exiting...")
