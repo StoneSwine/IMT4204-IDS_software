@@ -57,12 +57,15 @@ for i, c in enumerate(S):
         b = [1]*len(w)
 
     print(f"S_{i+1} = {c}")
+    print(f"B[S_j] = {sify(b)}")
+    print(f"i = {i+1}\n")
 
     print(f"R_O' = ({sify(R[0])} << 1) OR {sify(b)})", end = "")
     R_p[0] = shor(R[0], b)
     print(f" = {sify(R_p[0])}")
     print("- "*10)
     for k in range(1,K+1):
+        print(f"R_{k}' = ((R_{k} << 1) OR B[S_{i+1}]) AND R_{k-1} AND ((R_{k-1} << 1) OR NOT B[S_j]) AND (R_{k-1}' << 1)")
         print(f"R_{k}' = (({sify(R[k])} << 1) OR {sify(b)}) AND {sify(R[k-1])} AND (({sify(R[k-1])} << 1) OR NOT {sify(b)}) AND ({sify(R_p[k-1])} << 1)")
         s1 = shor(R[k], b)
         s2 = shor(R[k-1], inv(b))

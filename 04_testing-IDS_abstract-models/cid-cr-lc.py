@@ -6,10 +6,10 @@ from itertools import product
 import numpy as np
 
 # CHANGEME:
-TP=50
-TN=800
-FP=100
-FN=50
+TP=150
+TN=300
+FP=50
+FN=0
 
 tot = TP+TN+FP+FN
 
@@ -49,7 +49,8 @@ print("The joint probabilities:")
 print("P(X|Y)=𝑃(𝑥,𝑦)/𝑃(𝑦)")
 for k, i in zip(py, probtab):
   for j in i:
-    print(f"({j}/{k:.3f})={(j/k):.2f}")
+    if j:
+      print(f"({j}/{k:.3f})={(j/k):.2f}")
 print("- " * 10)
 
 print("The conditional entropy 𝐻(𝑋|𝑌)")
@@ -58,8 +59,9 @@ hxy = 0
 print("-(", end="")
 for k, i in zip(py, probtab):
   for j in i:
-    hxy += (j * math.log2(j / k))
-    print(f"{j}*log2({(j/k):.2f})", end=" + ")
+    if j:
+      hxy += (j * math.log2(j / k))
+      print(f"{j}*log2({(j/k):.2f})", end=" + ")
 hxy = -hxy
 print(f") = {hxy:.3f} ")
 print("- " * 10)
@@ -106,7 +108,7 @@ print("The joint probabilities:")
 print("𝑃(𝑥,𝑦)/𝑃(𝑦)=P(X|Y)")
 for k, i in zip(pz, probtab):
   for j in i:
-    if j != 0:
+    if j:
       print(f"({j}/{k:.3f})={(j/k):.2f}")
 print("- " * 10)
 
@@ -116,7 +118,7 @@ hxy = 0
 print("-(", end="")
 for k, i in zip(pz, probtab):
   for j in i:
-    if j != 0:
+    if j:
       hxy += (j * math.log2(j / k))
       print(f"{j}*log2({(j/k):.2f})", end=" + ")
 hxy = -hxy
